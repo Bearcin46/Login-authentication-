@@ -15,7 +15,6 @@
     "@types/dotenv": "^8.2.0",
     "@types/express": "^4.17.21",
     "@types/joi": "^17.2.3",
-    "@types/joi-password-complexity": "^4.2.2",
     "@types/jsonwebtoken": "^9.0.6",
     "@types/mongoose": "^5.11.97",
     "@types/nodemon": "^1.19.6",
@@ -28,6 +27,7 @@
     "nodemon": "^3.1.0"
   },
   "devDependencies": {
+    "@types/joi-password-complexity": "^4.2.2",
     "joi": "^17.12.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.3"
