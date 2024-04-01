@@ -2,6 +2,9 @@ import mongoose from "mongoose";
 import * as jwt from "jsonwebtoken";
 import joi from "joi";
 import passwordComplexity from "joi-password-complexity";
+import * as dotenv from "dotenv";
+
+dotenv.config();
 
 const UserSchema = new mongoose.Schema({
   firstName: { type: String, required: true },
