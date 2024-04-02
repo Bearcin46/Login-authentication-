@@ -5,8 +5,8 @@ import * as dotenv from "dotenv";
 
 dotenv.config();
 
-export const router = Router();
-router.post("/", async (req, res) => {
+export const userRouter = Router();
+userRouter.post("/", async (req, res) => {
   try {
     const { error } = validate(req.body);
     if (error)

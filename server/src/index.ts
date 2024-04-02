@@ -2,6 +2,8 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import * as dotenv from "dotenv";
+import { userRouter } from "./routes/userRoutes";
+import { authRouter } from "./routes/auth";
 
 dotenv.config();
 const server = express();
@@ -18,6 +20,9 @@ mongoose.connect(connection).then(() => {
 server.get("/", (req, res) => {
   res.send("server connected successfully");
 });
+
+server.use("/api/users", userRouter);
+server.use("/api/auth", authRouter);
 
 server.listen(SERVER_PORT, () => {
   console.log("server is running in http://localhost:1234");

@@ -2,9 +2,16 @@ import { Router } from "express";
 import { UserModel } from "Users";
 import joi from "joi";
 import bcrypt from "bcrypt";
+import { Document } from "mongoose";
 
-export const router = Router();
-router.post("/", async (req, res) => {
+declare module "mongoose" {
+  interface Document {
+    generateAuthToken(): string;
+  }
+}
+
+export const authRouter = Router();
+authRouter.post("/", async (req, res) => {
   try {
     const { error } = validate(req.body);
     if (error)
