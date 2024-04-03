@@ -1,11 +1,20 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import FormInput from "./FormInput";
 import { Link } from "react-router-dom";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 
 interface formDatas {
   email: string;
   password: string;
 }
+
+const formSchema = z.object({
+  email: z.string().email({ message: "Invalid email address" }),
+  password: z
+    .string()
+    .min(8, { message: "Password should be atleast 8 characters" }),
+});
 
 const Login = () => {
   const {
@@ -13,7 +22,7 @@ const Login = () => {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<formDatas>({});
+  } = useForm<formDatas>({ resolver: zodResolver(formSchema) });
 
   const formSubmit: SubmitHandler<formDatas> = (data) => {
     console.log(data);
