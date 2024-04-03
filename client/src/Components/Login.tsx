@@ -3,45 +3,25 @@ import FormInput from "./FormInput";
 import { Link } from "react-router-dom";
 
 interface formDatas {
-  firstName: string;
-  lastName: string;
   email: string;
   password: string;
 }
 
-const Signup = () => {
+const Login = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
   } = useForm<formDatas>({});
-  const formSubmit: SubmitHandler<formDatas> = (data, e) => {
-    e?.preventDefault();
+
+  const formSubmit: SubmitHandler<formDatas> = (data) => {
     console.log(data);
   };
   return (
     <div>
-      <h1>Hi all im signup</h1>
+      <h1>Login to your Account</h1>
       <form action="" onSubmit={handleSubmit(formSubmit)}>
-        {/* first name */}
-        <FormInput
-          label={"Enter your First Name"}
-          name={"firstName"}
-          placeholder={"Enter your First Name"}
-          register={register("firstName")}
-          error={errors.firstName}
-        />
-
-        {/* last name */}
-        <FormInput
-          label={"Enter your Last Name"}
-          name={"lastName"}
-          placeholder={"Enter your Last Name"}
-          register={register("lastName")}
-          error={errors.lastName}
-        />
-
         {/* email*/}
         <FormInput
           label={"Enter your Email"}
@@ -60,12 +40,11 @@ const Signup = () => {
           register={register("password")}
           error={errors.password}
         />
-
-        <button className="bg-green-500 px-4 py-2">Submit</button>
+        <button className="px-4 py-2 bg-green-600">Login</button>
         <p>
-          Already have a account?{" "}
+          New Here?
           <span className="text-blue-600">
-            <Link to="/login">Login Here</Link>
+            <Link to="/signup">Register Now</Link>
           </span>
         </p>
       </form>
@@ -73,4 +52,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default Login;
