@@ -1,8 +1,9 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import FormInput from "./FormInput";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import axios from "axios";
 
 interface formDatas {
   firstName: string;
@@ -33,9 +34,18 @@ const Signup = () => {
     formState: { errors },
     reset,
   } = useForm<formDatas>({ resolver: zodResolver(formSchema) });
-  const formSubmit: SubmitHandler<formDatas> = (data, e) => {
+
+  const formSubmit: SubmitHandler<formDatas> = async (data, e) => {
     e?.preventDefault();
-    console.log(data);
+    try {
+      const url = "http://localost:1234/api/auth";
+      const { data: res } = await axios.post(url, data);
+      <Navigate to="/login" />;
+      console.log(res.message);
+      reset();
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <div>

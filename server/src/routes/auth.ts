@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { UserModel } from "Users";
+import { UserModel } from "../Users";
 import joi from "joi";
 import bcrypt from "bcrypt";
 import { Document } from "mongoose";

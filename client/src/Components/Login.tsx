@@ -1,8 +1,9 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import FormInput from "./FormInput";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import axios from "axios";
 
 interface formDatas {
   email: string;
@@ -24,8 +25,17 @@ const Login = () => {
     reset,
   } = useForm<formDatas>({ resolver: zodResolver(formSchema) });
 
-  const formSubmit: SubmitHandler<formDatas> = (data) => {
-    console.log(data);
+  const formSubmit: SubmitHandler<formDatas> = async (data) => {
+    try {
+      const url = "http://localhost:1234/api/auth";
+      const { data: res } = await axios.post(url, data);
+      localStorage.setItem("token", res.datas);
+
+      <Navigate to="/" />;
+      reset();
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <div>
